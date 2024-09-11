@@ -1,0 +1,37 @@
+name: Greeting
+run-name: Greet ${{ inputs.subject }} ${{ inputs.greeting }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: "Person to greet"
+        type: string
+        required: true
+      greeting:
+        description: "Choose a greeting"
+        type: choice
+        options:
+          - Hello
+          - Hi
+          - Hey
+          - Greetings
+        required: true
+        default: 'Hello'
+      special_greeting:
+        description: "Use special greeting?"
+        type: boolean
+        default: false
+
+
+jobs:
+  greeting_run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet
+        run: |
+          if [ "${{ inputs.greeting }}" == "true" ]; then
+            echo "Hey you are amazing, ${{ inputs.subject }}!"
+          else
+            echo "${{ inputs.greeting }}, ${{ inputs.subject }}!"
+          fi
