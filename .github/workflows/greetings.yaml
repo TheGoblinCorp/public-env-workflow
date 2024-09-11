@@ -6,7 +6,11 @@ on:
     inputs:
       environment:
         description: "Environment to run tests against"
-        type: string
+        type: choice # Cambiado de environment a choice
+        options: # Opciones para el environment
+          - development
+          - staging
+          - production
         required: true
       subject:
         description: "Person to greet"
