@@ -38,9 +38,6 @@ jobs:
       - name: Set environment variable
         run: echo "ENV=${{ inputs.environment }}" >> $GITHUB_ENV
 
-      - name: Print Environment
-        run: echo "Running in environment: ${{ env.ENV }}" # Verificar el valor de ENV en los logs
-
       - name: Greet
         run: |
           if [ "${{ inputs.special_greeting }}" == "true" ]; then
