@@ -35,13 +35,10 @@ jobs:
   greeting_run:
     runs-on: ubuntu-latest
     steps:
-      - name: Set environment variable
-        run: echo "ENV=${{ inputs.environment }}" >> $GITHUB_ENV
-
       - name: Greet
         run: |
           if [ "${{ inputs.special_greeting }}" == "true" ]; then
-            echo "Hey you are amazing, ${{ inputs.subject }}! Running in ${{ env.ENV }} environment"
+            echo "Hey you are amazing, ${{ inputs.subject }}! Running in ${{ inputs.environment }} environment"
           else
-            echo "${{ inputs.greeting }}, ${{ inputs.subject }}! Running in ${{ env.ENV }} environment"
+            echo "${{ inputs.greeting }}, ${{ inputs.subject }}! Running in ${{ inputs.environment }} environment"
           fi
