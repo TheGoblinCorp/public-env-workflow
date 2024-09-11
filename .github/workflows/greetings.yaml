@@ -1,9 +1,13 @@
 name: Greeting
-run-name: Greet ${{ inputs.subject }} ${{ inputs.greeting }}
+run-name: Greet ${{ inputs.subject }} ${{ inputs.greeting }} ${{ inputs.environment }}
 
 on:
   workflow_dispatch:
     inputs:
+      environment:
+        description: "Environment to run tests against"
+        type: environment
+        required: true
       subject:
         description: "Person to greet"
         type: string
@@ -26,12 +30,13 @@ on:
 
 jobs:
   greeting_run:
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Greet
         run: |
           if [ "${{ inputs.greeting }}" == "true" ]; then
-            echo "Hey you are amazing, ${{ inputs.subject }}!"
+            echo "Hey you are amazing, ${{ inputs.subject }}! on ${{ var.ENV }}"
           else
-            echo "${{ inputs.greeting }}, ${{ inputs.subject }}!"
+            echo "${{ inputs.greeting }}, ${{ inputs.subject }}! on ${{ var.ENV }}"
           fi
