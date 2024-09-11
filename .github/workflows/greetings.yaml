@@ -6,7 +6,7 @@ on:
     inputs:
       environment:
         description: "Environment to run tests against"
-        type: choise
+        type: string
         required: true
       subject:
         description: "Person to greet"
