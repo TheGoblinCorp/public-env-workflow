@@ -6,8 +6,8 @@ on:
     inputs:
       environment:
         description: "Environment to run tests against"
-        type: choice # Cambiado de environment a choice
-        options: # Opciones para el environment
+        type: choice
+        options:
           - development
           - staging
           - production
@@ -31,16 +31,17 @@ on:
         type: boolean
         default: false
 
-
 jobs:
   greeting_run:
-    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment variable
+        run: echo "ENV=${{ inputs.environment }}" >> $GITHUB_ENV
+
       - name: Greet
         run: |
-          if [ "${{ inputs.greeting }}" == "true" ]; then
-            echo "Hey you are amazing, ${{ inputs.subject }}! on ${{ var.ENV }}"
+          if [ "${{ inputs.special_greeting }}" == "true" ]; then
+            echo "Hey you are amazing, ${{ inputs.subject }}! Running in ${{ env.ENV }} environment"
           else
-            echo "${{ inputs.greeting }}, ${{ inputs.subject }}! on ${{ var.ENV }}"
+            echo "${{ inputs.greeting }}, ${{ inputs.subject }}! Running in ${{ env.ENV }} environment"
           fi
