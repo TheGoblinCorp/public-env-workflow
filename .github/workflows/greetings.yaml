@@ -30,7 +30,16 @@ on:
         description: "Use special greeting?"
         type: boolean
         default: false
-
+      test:
+        description: "Choose a greeting"
+        type: choice
+        options:
+          - Hello
+          - Hi
+          - Hey
+          - Greetings
+        required: true
+        default: 'Hello'
 jobs:
   greeting_run:
     runs-on: ubuntu-latest
